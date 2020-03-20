@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>YouBike 臺北市公共自行車即時資訊</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
   <style>
-    body{ padding: 1em;  }
+    body {
+      padding: 1em;
+    }
   </style>
 
 </head>
+
 <body>
 
   <h1>YouBike 臺北市公共自行車即時資訊</h1>
 
   <div id="app">
 
-    <table class="table table-striped">
+    <p>
+      站點名稱搜尋: <input type="text" v-model="search">
+    </p>
+
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>#</th>
           <th>場站名稱</th>
           <th>場站區域</th>
-          <th>目前可用車輛</th>
-          <th>總停車格</th>
-          <th>資料更新時間</th>
+          <th>目前可用車輛
+            <i class="fa fa-sort-asc" aria-hidden="true" @click="sort('sbi-asc')"></i>
+            <i class="fa fa-sort-desc" aria-hidden="true" @click="sort('sbi-desc')"></i>
+          </th>
+          <th>總停車格
+            <i class="fa fa-sort-asc" aria-hidden="true" @click="sort('tot-asc')"></i>
+            <i class="fa fa-sort-desc" aria-hidden="true" @click="sort('tot-desc')"></i>
+          </th>
+          <th>資料更新時間
+            <i class="fa fa-sort-asc" aria-hidden="true" @click="sort('mday-asc')"></i>
+            <i class="fa fa-sort-desc" aria-hidden="true" @click="sort('mday-desc')"></i>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="s in ubikeStops">
+        <tr v-for="s in filteredStations">
           <td>{{ s.sno }}</td>
           <td>{{ s.sna }}</td>
           <td>{{ s.sarea }}</td>
@@ -49,4 +68,5 @@
   <script src="scripts.js"></script>
 
 </body>
+
 </html>
